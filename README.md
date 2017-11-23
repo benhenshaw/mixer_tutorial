@@ -7,7 +7,8 @@ If you are interested in playing multiple sounds at once you will need some way 
 - **basic_mixer.c** - Very basic mono mixer. *Start Here!*
 - *COMING SOON: **stereo_mixer.c** - Mixer with more features, in stereo.*
 
-## More Info
+## More Info
+
 ### About This Code
 - Only some basic knowledge of **C** is expected. There are also some explanations for those new to **C**.
 - The mixers have no dependencies, but the examples that use them rely on **SDL2** for audio device access.

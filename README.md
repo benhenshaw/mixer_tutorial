@@ -5,7 +5,7 @@ purposes.*
 If you are interested in playing multiple sounds at once you will need some way to mix the audio together. Here are some examples of how one could write an audio mixer. Each example builds on the previous, and they are best understood by reading them in order. Each mixer also has a corresponding example program that demonstrates its usage.
 
 - **basic_mixer.c** - Very basic mono mixer. *Start Here!*
-- *COMING SOON: **stereo_mixer.c** - Mixer with more features, in stereo.*
+- **stereo_mixer.c** - Adds panning and looping.
 
 ## More Info
 

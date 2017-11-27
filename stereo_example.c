@@ -63,8 +63,8 @@ int main(int argc, char ** argv) {
 
     Uint8 * third_sound = NULL;
     Uint32 third_sound_byte_count = 0;
-    SDL_LoadWAV("Fantasie.wav",
-        &request, &third_sound, &third_sound_byte_count);
+    SDL_assert(SDL_LoadWAV("Fantasie.wav",
+        &request, &third_sound, &third_sound_byte_count));
     int third_sound_sample_count = third_sound_byte_count / sizeof(float);
     play_audio(&mixer, third_sound, third_sound_sample_count, 0.0f, 1.0f, 0);
 

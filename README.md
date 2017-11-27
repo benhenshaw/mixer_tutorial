@@ -14,6 +14,7 @@ If you are interested in playing multiple sounds at once you will need some way 
 - The mixers have no dependencies, but the examples that use them rely on **SDL2** for audio device access.
 - These examples could be easily converted to **C++** with little or no modification.
 - The example programs also attempt to describe how to use some of the audio features of **SDL2**.
+- See ["Releases"](https://github.com/benhenshaw/mixer_tutorial/releases/tag/1.0) for the audio files used.
 
 ### About Audio
 - Sound is represented in a computer as a series of samples (just numbers).

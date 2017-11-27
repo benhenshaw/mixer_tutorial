@@ -46,7 +46,7 @@ int main(int argc, char ** argv) {
 
     Uint8 * first_sound = NULL;
     Uint32 first_sound_byte_count = 0;
-    SDL_assert(SDL_LoadWAV("audio_files/drums.wav",
+    SDL_assert(SDL_LoadWAV("drums.wav",
         &request, &first_sound, &first_sound_byte_count));
     int first_sound_sample_count = first_sound_byte_count / sizeof(float);
     // Here we keep hold of the index that is returned so that we can
@@ -56,14 +56,14 @@ int main(int argc, char ** argv) {
 
     Uint8 * second_sound = NULL;
     Uint32 second_sound_byte_count = 0;
-    SDL_assert(SDL_LoadWAV("audio_files/Gymnopedie.wav",
+    SDL_assert(SDL_LoadWAV("Gymnopedie.wav",
         &request, &second_sound, &second_sound_byte_count));
     int second_sound_sample_count = second_sound_byte_count / sizeof(float);
     play_audio(&mixer, second_sound, second_sound_sample_count, 1.0f, 0.0f, 0);
 
     Uint8 * third_sound = NULL;
     Uint32 third_sound_byte_count = 0;
-    SDL_LoadWAV("audio_files/Fantasie.wav",
+    SDL_LoadWAV("Fantasie.wav",
         &request, &third_sound, &third_sound_byte_count);
     int third_sound_sample_count = third_sound_byte_count / sizeof(float);
     play_audio(&mixer, third_sound, third_sound_sample_count, 0.0f, 1.0f, 0);

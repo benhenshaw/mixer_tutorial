@@ -22,8 +22,8 @@ typedef struct {
     float * samples;    // The audio data itself.
     int sample_count;   // Number of samples in the data.
     int sample_index;   // Index of the last sample written.
-    float left_gain;    // How loud to play the sound.
-    float right_gain;   // Stereo balance (how loud in each ear).
+    float left_gain;    // How loud to play the sound in the left channel.
+    float right_gain;   // Same for the right channel.
     int loop;           // If the sound should repeat.
 } Mixer_Channel;
 

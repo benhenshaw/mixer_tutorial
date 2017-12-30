@@ -47,14 +47,7 @@ void mix_audio(void * stream, int samples_requested) {
                     // Adjust the sample by its gain.
                     new_sample *= channel->gain;
                     // Here is the mixing of the signals.
-                    // sum is the actual mix of final_sample and new_sample,
-                    // but just adding them makes a sound that is louder than
-                    // either of them alone. product gives us a value that we
-                    // can use to balance the amplitude of the sound to a
-                    // loudness between the two samples.
-                    float sum     = final_sample + new_sample;
-                    float product = final_sample * new_sample;
-                    final_sample  = sum - product;
+                    final_sample += new_sample;
                     // Move the channel to the next sample.
                     channel->sample_index += 1;
                 } else {

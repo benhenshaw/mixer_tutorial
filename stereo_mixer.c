@@ -67,13 +67,8 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
                     new_right *= mixer->gain;
 
                     // Mix each channel individually.
-                    float left_sum     = final_left_sample + new_left;
-                    float left_product = final_left_sample * new_left;
-                    final_left_sample  = left_sum - left_product;
-
-                    float right_sum     = final_right_sample + new_right;
-                    float right_product = final_right_sample * new_right;
-                    final_right_sample  = right_sum - right_product;
+                    final_left_sample  += new_left;
+                    final_right_sample  += new_left;
 
                     channel->sample_index += 1;
 

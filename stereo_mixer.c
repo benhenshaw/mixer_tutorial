@@ -10,7 +10,6 @@
         - Stereo output.
         - Global gain control.
         - Sound looping.
-        - Some consideration of memory management.
 
     Limitations:
         - Only plays mono sources with panning.

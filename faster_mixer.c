@@ -95,7 +95,6 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
 int play_audio(Mixer * mixer, void * stream, int sample_count, float left_gain, float right_gain, int loop) {
     for (int i = 0; i < mixer->channel_count; ++i) {
         if (mixer->channels[i].samples == NULL) {
-            int byte_count = sample_count * sizeof(float);
             mixer->channels[i].samples      = stream;
             mixer->channels[i].sample_count = sample_count;
             mixer->channels[i].sample_index = 0;

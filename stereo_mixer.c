@@ -93,7 +93,6 @@ int play_audio(Mixer * mixer, void * stream, int sample_count, float left_gain, 
     // Find the first empty channel and use that to play our sound.
     for (int i = 0; i < mixer->channel_count; ++i) {
         if (mixer->channels[i].samples == NULL) {
-            int byte_count = sample_count * sizeof(float);
             mixer->channels[i].samples      = stream;
             mixer->channels[i].sample_count = sample_count;
             mixer->channels[i].sample_index = 0;

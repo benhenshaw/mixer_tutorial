@@ -78,9 +78,6 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
                         channel->sample_index = 0;
                     }
                 } else {
-                    // Since we allocated a copy of the audio data using 'play_audio'
-                    // we can safely free the audio now that we know it has no use.
-                    free(channel->samples);
                     *channel = (Mixer_Channel){};
                 }
             }
@@ -97,11 +94,8 @@ int play_audio(Mixer * mixer, void * stream, int sample_count, float left_gain, 
     // Find the first empty channel and use that to play our sound.
     for (int i = 0; i < mixer->channel_count; ++i) {
         if (mixer->channels[i].samples == NULL) {
-            // Unlike 'basic_mixer.c', we will make a copy of the audio buffer passed in.
-            // This is so we can manage the memory properly when we are done with the sound.
             int byte_count = sample_count * sizeof(float);
-            mixer->channels[i].samples = malloc(byte_count);
-            memcpy(mixer->channels[i].samples, stream, byte_count);
+            mixer->channels[i].samples      = stream;
             mixer->channels[i].sample_count = sample_count;
             mixer->channels[i].sample_index = 0;
             mixer->channels[i].left_gain    = left_gain;

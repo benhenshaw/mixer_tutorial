@@ -21,7 +21,7 @@ If you are interested in playing multiple sounds at once you will need some way 
 - Sound is represented in a computer as a series of samples (just numbers).
 - The value of this sample is the amplitude of the sound.
 - To mix two sounds together, you only need to add their samples together.
-- The resulting samples will appear to our ears to have both sounds playing in it, but somewhat louder than either on their own.
+- The resulting samples will appear to our ears to have both sounds playing in it.
 
 I hope you find this useful. Feedback is very welcome!
 

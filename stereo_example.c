@@ -6,7 +6,11 @@
 */
 
 #include <SDL2/SDL.h>
+
 #include "stereo_mixer.c"
+// The faster mixer provides exactly the same functionality, so
+// comment out the above line and uncomment this one to test it.
+// #include "faster_mixer.c"
 
 // This time our example runs on the audio callback.
 // This function will be called whenever the output audio buffer needs more data.

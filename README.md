@@ -6,6 +6,7 @@ If you are interested in playing multiple sounds at once you will need some way 
 
 - **basic_mixer.c** - Very basic mono mixer. *Start Here!*
 - **stereo_mixer.c** - Adds panning and looping.
+- **faster_mixer.c** - Some slight adjustments to improve performance.
 
 ## More Info
 
@@ -24,4 +25,4 @@ If you are interested in playing multiple sounds at once you will need some way 
 
 I hope you find this useful. Feedback is very welcome!
 
-\- Ben (2017-11-23)
+\- Ben (2017-11-23, updated: 2018-02-22)

@@ -8,7 +8,8 @@
 #include <SDL2/SDL.h>
 #include "basic_mixer.c"
 
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
     // Initialise the audio component of SDL.
     // It will give us easy access to the audio device.
     SDL_Init(SDL_INIT_AUDIO);
@@ -41,21 +42,24 @@ int main(int argc, char ** argv) {
     // These variables will be filled in by SDL_LoadWAV.
     Uint8 * first_sound = NULL;
     Uint32 first_sound_byte_count = 0;
-    SDL_assert(SDL_LoadWAV("Gnossienne.wav", &request, &first_sound, &first_sound_byte_count));
+    SDL_assert(SDL_LoadWAV("Gnossienne.wav",
+        &request, &first_sound, &first_sound_byte_count));
     int first_sound_sample_count = first_sound_byte_count / sizeof(float);
     play_audio(first_sound, first_sound_sample_count, 1.0f);
 
     // Do the same for a second sound.
     Uint8 * second_sound = NULL;
     Uint32 second_sound_byte_count = 0;
-    SDL_assert(SDL_LoadWAV("Gymnopedie.wav", &request, &second_sound, &second_sound_byte_count));
+    SDL_assert(SDL_LoadWAV("Gymnopedie.wav",
+        &request, &second_sound, &second_sound_byte_count));
     int second_sound_sample_count = second_sound_byte_count / sizeof(float);
     play_audio(second_sound, second_sound_sample_count, 1.0f);
 
     // And a third.
     Uint8 * third_sound = NULL;
     Uint32 third_sound_byte_count = 0;
-    SDL_assert(SDL_LoadWAV("Fantasie.wav", &request, &third_sound, &third_sound_byte_count));
+    SDL_assert(SDL_LoadWAV("Fantasie.wav",
+        &request, &third_sound, &third_sound_byte_count));
     int third_sound_sample_count = third_sound_byte_count / sizeof(float);
     play_audio(third_sound, third_sound_sample_count, 1.0f);
 

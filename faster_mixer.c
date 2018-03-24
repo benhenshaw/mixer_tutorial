@@ -16,32 +16,39 @@
 
 
 // Our main data structures are identical to the stereo mixer.
-typedef struct {
+typedef struct
+{
     float * samples;    // The audio data itself.
     int sample_count;   // Number of samples in the data.
-    int sample_index;   // Index of the last sample written.
+    int sample_index;   // Index of the next sample to be played.
     float left_gain;    // How loud to play the sound in the left channel.
     float right_gain;   // Same for the right channel.
     int loop;           // If the sound should repeat.
-} Mixer_Channel;
+}
+Mixer_Channel;
 
-typedef struct {
+typedef struct
+{
     Mixer_Channel * channels;
     int channel_count;
     float gain;
-} Mixer;
+}
+Mixer;
 
-Mixer create_mixer(int channel_count, float gain) {
+Mixer create_mixer(int channel_count, float gain)
+{
     Mixer mixer = {};
     mixer.channels = calloc(channel_count, sizeof(Mixer_Channel));
-    if (mixer.channels) {
+    if (mixer.channels)
+    {
         mixer.channel_count = channel_count;
         mixer.gain = gain;
     }
     return mixer;
 }
 
-void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
+void mix_audio(Mixer * mixer, void * stream, int samples_requested)
+{
     float * samples = (float *)stream;
 
     // A small change has been made here so that the mixer reads consecutive
@@ -52,19 +59,24 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
     // We will need to zero our whole stream first so that, in the case where no
     // sound is playing or there isn't enough to fill all the requested samples,
     // we will not leave garbage data in the buffer.
-    for (int sample_index = 0; sample_index < samples_requested; ++sample_index) {
+    for (int sample_index = 0; sample_index < samples_requested; ++sample_index)
+    {
         samples[sample_index] = 0.0f;
     }
 
     // This time we will go through each channel, then mix all of that channel's
     // samples into the output buffer in one go. Most of this should be familiar
     // if you have read the previous mixer examples.
-    for (int channel_index = 0; channel_index < mixer->channel_count; ++channel_index) {
+    for (int channel_index = 0; channel_index < mixer->channel_count; ++channel_index)
+    {
         Mixer_Channel * channel = &mixer->channels[channel_index];
-        if (channel->samples) {
+        if (channel->samples)
+        {
             for (int sample_index = 0;
-                 sample_index < samples_requested && channel->sample_index < channel->sample_count;
-                 ++sample_index) {
+                 sample_index < samples_requested &&
+                 channel->sample_index < channel->sample_count;
+                 ++sample_index)
+            {
                 float new_left  = channel->samples[channel->sample_index];
                 float new_right = channel->samples[channel->sample_index];
 
@@ -81,10 +93,14 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
             }
 
             // This check can now be made after the main mixing loop.
-            if (channel->sample_index >= channel->sample_count) {
-                if (channel->loop) {
+            if (channel->sample_index >= channel->sample_count)
+            {
+                if (channel->loop)
+                {
                     channel->sample_index = 0;
-                } else {
+                }
+                else
+                {
                     *channel = (Mixer_Channel){};
                 }
             }
@@ -92,9 +108,13 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
     }
 }
 
-int play_audio(Mixer * mixer, void * stream, int sample_count, float left_gain, float right_gain, int loop) {
-    for (int i = 0; i < mixer->channel_count; ++i) {
-        if (mixer->channels[i].samples == NULL) {
+int play_audio(Mixer * mixer, void * stream, int sample_count,
+    float left_gain, float right_gain, int loop)
+{
+    for (int i = 0; i < mixer->channel_count; ++i)
+    {
+        if (mixer->channels[i].samples == NULL)
+        {
             mixer->channels[i].samples      = stream;
             mixer->channels[i].sample_count = sample_count;
             mixer->channels[i].sample_index = 0;

@@ -14,7 +14,8 @@
 
 // This time our example runs on the audio callback.
 // This function will be called whenever the output audio buffer needs more data.
-void audio_callback(void * data, Uint8 * stream, int byte_count) {
+void audio_callback(void * data, Uint8 * stream, int byte_count)
+{
     // We know that this points to a Mixer, so cast it to a Mixer.
     Mixer * mixer = data;
     int sample_count = byte_count / sizeof(float);
@@ -22,7 +23,8 @@ void audio_callback(void * data, Uint8 * stream, int byte_count) {
     mix_audio(mixer, stream, sample_count);
 }
 
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
     // For more info on handling an SDL2 audio device see 'basic_mixer.c'.
     SDL_Init(SDL_INIT_AUDIO);
 
@@ -74,8 +76,8 @@ int main(int argc, char ** argv) {
 
     SDL_PauseAudioDevice(audio_device, 0);
 
-    // This loop will run indefinitely.
-    while (1) {
+    while (1)
+    {
         float time = SDL_GetTicks() * 0.0015f;
         SDL_LockAudioDevice(audio_device);
         // We'll update the paning with some values that smoothly transition

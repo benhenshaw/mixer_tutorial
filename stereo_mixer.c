@@ -17,14 +17,16 @@
 */
 
 // Holds everything we need to play some audio data.
-typedef struct {
+typedef struct
+{
     float * samples;    // The audio data itself.
     int sample_count;   // Number of samples in the data.
-    int sample_index;   // Index of the last sample written.
+    int sample_index;   // Index of the next sample to be played.
     float left_gain;    // How loud to play the sound in the left channel.
     float right_gain;   // Same for the right channel.
     int loop;           // If the sound should repeat.
-} Mixer_Channel;
+}
+Mixer_Channel;
 
 // The basic mixer (from 'basic_mixer.c') had a global array of channels.
 // This time, lets move this to an object that we can pass into our functions.
@@ -45,16 +47,21 @@ Mixer create_mixer(int channel_count, float gain) {
 }
 
 // See 'basic_mixer.c' for more info on this function.
-void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
+void mix_audio(Mixer * mixer, void * stream, int samples_requested)
+{
     float * samples = (float *)stream;
-    for (int sample_index = 0; sample_index <= samples_requested; ++sample_index) {
+    for (int sample_index = 0; sample_index <= samples_requested; ++sample_index)
+    {
         // This time we have two samples to write: left channel and right channel.
         float final_left_sample = 0.0f;
         float final_right_sample = 0.0f;
-        for (int channel_index = 0; channel_index < mixer->channel_count; ++channel_index) {
+        for (int channel_index = 0; channel_index < mixer->channel_count; ++channel_index)
+        {
             Mixer_Channel * channel = &mixer->channels[channel_index];
-            if (channel->samples) {
-                if (channel->sample_index <= channel->sample_count) {
+            if (channel->samples)
+            {
+                if (channel->sample_index <= channel->sample_count)
+                {
                     float new_left  = channel->samples[channel->sample_index];
                     float new_right = channel->samples[channel->sample_index];
 
@@ -73,10 +80,13 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
 
                     // If the sound should loop reset sample_index back to zero.
                     // Next sample the sound will start again from the beginning.
-                    if (channel->loop && channel->sample_index > channel->sample_count) {
+                    if (channel->loop && channel->sample_index > channel->sample_count)
+                    {
                         channel->sample_index = 0;
                     }
-                } else {
+                }
+                else
+                {
                     *channel = (Mixer_Channel){};
                 }
             }
@@ -89,10 +99,14 @@ void mix_audio(Mixer * mixer, void * stream, int samples_requested) {
     }
 }
 
-int play_audio(Mixer * mixer, void * stream, int sample_count, float left_gain, float right_gain, int loop) {
+int play_audio(Mixer * mixer, void * stream, int sample_count,
+    float left_gain, float right_gain, int loop)
+{
     // Find the first empty channel and use that to play our sound.
-    for (int i = 0; i < mixer->channel_count; ++i) {
-        if (mixer->channels[i].samples == NULL) {
+    for (int i = 0; i < mixer->channel_count; ++i)
+    {
+        if (mixer->channels[i].samples == NULL)
+        {
             mixer->channels[i].samples      = stream;
             mixer->channels[i].sample_count = sample_count;
             mixer->channels[i].sample_index = 0;
